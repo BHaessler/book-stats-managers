@@ -7,6 +7,9 @@ class BookSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'author']
 
 class ReadingEntrySerializer(serializers.ModelSerializer):
+    # Nest the BookSerializer to return detailed information about the book
+    book = serializers.PrimaryKeyRelatedField(queryset=Book.objects.all())
+
     class Meta:
         model = ReadingEntry
-        fields = ['id', 'book', 'pages_read', 'date']
+        fields = ['book', 'pages_read', 'date']
