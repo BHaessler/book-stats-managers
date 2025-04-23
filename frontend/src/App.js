@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './component-css/tables.css';
+import './App.css';
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -133,14 +135,30 @@ function App() {
       </form>
 
       <h3>Reading Entries List</h3>
-      <ul>
-        {entries.map(entry => (
-          <li key={entry.id}>
-            {entry.book.title} by {entry.book.author} - {entry.pages_read} pages on {entry.date}
-          </li>
-        ))}
-      </ul>
-    </div>
+        <table className="reading-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Pages Read</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {entries.map(entry => {
+              const book = books.find(b => b.id === entry.book);
+              return (
+                <tr key={entry.id}>
+                  <td>{book ? book.title : 'Unknown Book'}</td>
+                  <td>{book ? book.author : 'Unknown Author'}</td>
+                  <td>{entry.pages_read}</td>
+                  <td>{entry.date}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
   );
 }
 
