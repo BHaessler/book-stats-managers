@@ -5,6 +5,9 @@ import BookForm from './components/BookForm';
 import EntryForm from './components/EntryForm';
 import BooksList from './components/BooksList';
 import ReadingEntriesTable from './components/ReadingEntriesTable';
+import { ThemeProvider } from './context/ThemeContext';
+import ThemeToggle from './components/ThemeToggle';
+import './component-css/styles.css';
 import './App.css';
 
 function App() {
@@ -43,21 +46,25 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>Book Tracker</h1>
-      
-      <h2>Books</h2>
-      <BookForm onSubmit={handleBookSubmit} />
+    <ThemeProvider>
+      <div className="App">
+        <ThemeToggle />
 
-      <h3>Books List</h3>
-      <BooksList books={books} />
+        <h1>Book Tracker</h1>
+        
+        <h2>Books</h2>
+        <BookForm onSubmit={handleBookSubmit} />
 
-      <h2>Reading Entries</h2>
-      <EntryForm books={books} onSubmit={handleEntrySubmit} />
+        <h3>Books List</h3>
+        <BooksList books={books} />
 
-      <h3>Reading Entries List</h3>
-      <ReadingEntriesTable entries={entries} books={books} />
-    </div>
+        <h2>Reading Entries</h2>
+        <EntryForm books={books} onSubmit={handleEntrySubmit} />
+
+        <h3>Reading Entries List</h3>
+        <ReadingEntriesTable entries={entries} books={books} />
+      </div>
+    </ThemeProvider>
   );
 }
 
